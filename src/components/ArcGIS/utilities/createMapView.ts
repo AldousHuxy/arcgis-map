@@ -1,5 +1,6 @@
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
+import { BASEMAP, CENTER, ZOOM } from '../../../constants';
 
 type CreateMapViewProps = {
   container: HTMLDivElement
@@ -7,9 +8,9 @@ type CreateMapViewProps = {
 }
 
 export const createMapView = ({ container, mapProperties }: CreateMapViewProps) => {
-  const center: [number, number] = [-105.14041811230041, 39.71438600514241]
-  const zoom: number = 16
-  const basemap: string = 'osm'
+  const center: [number, number] = CENTER
+  const zoom: number = ZOOM
+  const basemap: string = BASEMAP
   const map = new Map ({ basemap, ...mapProperties })
 
   return new MapView({ map, container, center, zoom })

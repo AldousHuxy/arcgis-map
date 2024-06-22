@@ -17,16 +17,17 @@ import { DropdownSelector } from './components/DropdownSelector';
 import basemaps from './data/basemaps.json';
 import thedistrict from './data/thedistrict.json';
 import Box from '@mui/material/Box';
+import { BASEMAP } from './constants';
 
 const App = () => {
   const [basemap, setBasemap] = useState<string>('osm')
 
-  const point: Point = createPoint({
-    longitude: -105.14041945340482,
-    latitude: 39.714388068402506
-  })
+  // const point: Point = createPoint({
+  //   longitude: -105.14041945340482,
+  //   latitude: 39.714388068402506
+  // })
 
-  const simpleMarkerSymbol: SimpleMarkerSymbol = createSimpleMarkerSymbol({ color: 'red' })
+  // const simpleMarkerSymbol: SimpleMarkerSymbol = createSimpleMarkerSymbol({ color: 'red' })
   
   const polyline: Polyline = createPolyline({
     paths: [thedistrict]
@@ -55,13 +56,13 @@ const App = () => {
   return (
     <Box sx={{ position: 'relative' }}>
       <DropdownSelector
-        defaultMap='osm'
+        defaultMap={BASEMAP}
         options={basemaps}
         onChange={setBasemap}
       />
       <ArcMapView mapProperties={{ basemap }} onClick={e => displayCoordinates(e)}>
         <ArcGraphicsLayer>
-          <ArcGraphic geometry={point} symbol={simpleMarkerSymbol} />
+          {/* <ArcGraphic geometry={point} symbol={simpleMarkerSymbol} /> */}
           <ArcGraphic geometry={polyline} symbol={simpleLineSymbol} />
           {/* <ArcGraphic geometry={polygon} symbol={simpleFillSymbol} /> */}
         </ArcGraphicsLayer>
