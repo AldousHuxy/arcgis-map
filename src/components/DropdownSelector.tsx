@@ -18,7 +18,7 @@ export const DropdownSelector = ({ defaultMap, options, onChange }: DropdownSele
     return (
         <FormControl variant="filled" sx={{
             position: 'absolute',
-            bottom: 20,
+            bottom: 30,
             left: 10,
             zIndex: 1000 
         }}>

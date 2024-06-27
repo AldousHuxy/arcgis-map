@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "json-server --watch src/data/server.json --port 4000",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -14,10 +16,15 @@
     "@emotion/react": "11.11.4",
     "@emotion/styled": "11.11.5",
     "@mui/material": "5.15.20",
+    "@tanstack/react-query": "5.48.0",
+    "@tanstack/react-query-devtools": "5.48.0",
+    "axios": "1.7.2",
+    "concurrently": "8.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@types/geojson": "7946.0.14",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
