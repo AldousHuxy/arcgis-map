@@ -1,5 +1,5 @@
 export type Location = {
-    id: number
+    _id: string
     label: string
     longitude: number
     latitude: number
