@@ -3,8 +3,7 @@ import { axiosClient } from "./axios"
 import { AxiosResponse } from "axios"
 import { Location } from '../types/location'
 
-export const useGetLocationsQuery = () => {
-
+export const useGetAllLocationsQuery = () => {
     return useQuery({
         queryKey: ['locations'],
         queryFn: async () => (await axiosClient.get<never, AxiosResponse<Location[], Error>, unknown>('/locations')).data,

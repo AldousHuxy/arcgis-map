@@ -11,13 +11,13 @@ import { createSimpleMarkerSymbol } from './components/ArcGIS/utilities/symbols/
 import { createPolygon } from './components/ArcGIS/utilities/geometry/createPolygon';
 import { createSimpleFillSymbol } from './components/ArcGIS/utilities/symbols/createSimpleFillSymbol';
 import { DropdownSelector } from './components/DropdownSelector';
-import districtLines from './data/district-lines.json';
-import { useGetLocationsQuery } from './api/useGetLocationsQuery';
+import district from './data/district.json';
+import { useGetAllLocationsQuery } from './api/useGetAllLocationsQuery';
 import { basemaps } from './components/ArcGIS/data/basemaps';
 
 const App = () => {
   const [basemap, setBasemap] = useState<string>('osm')
-  const { data: locations } = useGetLocationsQuery()
+  const { data: locations } = useGetAllLocationsQuery()
 
   return (
     <Box sx={{ position: 'relative' }}>
@@ -40,7 +40,7 @@ const App = () => {
             symbol={createSimpleLineSymbol({ color: 'blue', width: 3, })}
           /> */}
           <ArcGraphic
-            geometry={createPolygon({ rings: [districtLines] })}
+            geometry={createPolygon({ rings: [district] })}
             symbol={createSimpleFillSymbol({ color: [0, 0, 0, 0.125] })}
           />
         </ArcGraphicsLayer>
