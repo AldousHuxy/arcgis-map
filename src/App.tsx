@@ -20,7 +20,6 @@ import { DropdownSelector } from './components/DropdownSelector';
 import districtLines from './data/district-lines.json';
 import { useGetLocationsQuery } from './api/useGetLocationsQuery';
 import { basemaps } from './components/ArcGIS/data/basemaps';
-import { Location } from './types/location';
 
 const App = () => {
   const [basemap, setBasemap] = useState<string>('osm')

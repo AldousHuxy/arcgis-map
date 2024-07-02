@@ -2,6 +2,7 @@ import { ReactNode, useContext, useEffect, useState } from 'react'
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import { MapViewContext } from '../../context/MapViewContext';
 import { GraphicsLayersContext } from '../../context/GraphicsLayerContext';
+import { featureLayer } from './layers/FeatureLayer';
 
 type ArcGraphicsLayerProps = {
     children?: ReactNode
@@ -19,7 +20,8 @@ export const ArcGraphicsLayer = ({ children }: ArcGraphicsLayerProps) => {
     useEffect(() => {
         if (!view || !graphicsLayer) return
         view?.map.add(graphicsLayer)
-    }, [view, graphicsLayer])
+        view?.map.add(featureLayer)
+    }, [view, graphicsLayer, featureLayer])
 
     return (
         <>
