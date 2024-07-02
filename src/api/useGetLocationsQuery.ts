@@ -7,7 +7,7 @@ export const useGetLocationsQuery = () => {
 
     return useQuery({
         queryKey: ['locations'],
-        queryFn: async () => (await axiosClient.get<never, AxiosResponse<Location, Error>, unknown>('/location')).data,
-        initialData: {} as Location
+        queryFn: async () => (await axiosClient.get<never, AxiosResponse<Location[], Error>, unknown>('/locations')).data,
+        initialData: [] as Location[]
     })
 }

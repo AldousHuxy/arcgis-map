@@ -17,7 +17,7 @@ import { createPolygon } from './components/ArcGIS/utilities/geometry/createPoly
 import SimpleFillSymbol from '@arcgis/core/symbols/SimpleFillSymbol';
 import { createSimpleFillSymbol } from './components/ArcGIS/utilities/symbols/createSimpleFillSymbol';
 import { DropdownSelector } from './components/DropdownSelector';
-import districtLines from './data/districtLines.json';
+import districtLines from './data/district-lines.json';
 import { useGetLocationsQuery } from './api/useGetLocationsQuery';
 import { basemaps } from './components/ArcGIS/data/basemaps';
 import { Location } from './types/location';
