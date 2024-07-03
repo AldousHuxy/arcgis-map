@@ -2,6 +2,7 @@ import { z } from "zod"
 
 const locationFormData = z.object({
     label: z.string(),
+    color: z.string(),
     longitude: z.number(),
     latitude: z.number()
 })
@@ -9,6 +10,7 @@ const locationFormData = z.object({
 export type Location = {
     _id: string
     label: string
+    color: string
     longitude: number
     latitude: number
 }

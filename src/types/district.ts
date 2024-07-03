@@ -1,3 +1,3 @@
 type Longitude = number
 type Latitude = number
-export type District = [[Longitude, Latitude]]
+export type District = [[[Longitude, Latitude]]]

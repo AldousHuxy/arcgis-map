@@ -2,33 +2,52 @@
     "locations": [
         {
             "_id": "0001",
-            "label": "MHFD Office",
+            "label": "Work",
+            "color": "red",
             "longitude": -105.14041945340482,
             "latitude": 39.714388068402506
         },
         {
             "_id": "0002",
-            "label": "Avery Park",
+            "label": "Home",
+            "color": "orange",
             "longitude": -104.87263048976244,
             "latitude": 39.599807473465646
         },
         {
             "_id": "0003",
-            "label": "Capitol Building",
+            "label": "Capitol",
+            "color": "yellow",
             "longitude": -104.9847333915665,
             "latitude": 39.739525339997684
         },
         {
             "_id": "0004",
-            "label": "DIA",
+            "label": "Airport",
+            "color": "green",
             "longitude": -104.67431599359716,
             "latitude": 39.84965952719683
         },
         {
             "_id": "0005",
-            "label": "CU Boulder",
+            "label": "University",
+            "color": "blue",
             "longitude": -105.26605147617526,
             "latitude": 40.0074731396071
+        },
+        {
+            "_id": "0006",
+            "label": "Stadium",
+            "color": "indigo",
+            "longitude": -105.02053053709601,
+            "latitude": 39.745210153261276
+        },
+        {
+            "_id": "0007",
+            "label": "Amphitheatre",
+            "color": "violet",
+            "longitude": -105.20523305768916,
+            "latitude": 39.66564546538505
         }
     ]
 }

@@ -6,18 +6,20 @@ import { ArcGraphicsLayer } from './components/ArcGIS/ArcGraphicsLayer';
 import { ArcMapView } from './components/ArcGIS/ArcMapView';
 import { createPoint } from './components/ArcGIS/utilities/geometry/createPoint';
 import { createSimpleMarkerSymbol } from './components/ArcGIS/utilities/symbols/createSimpleMarkerSymbol';
-// import { createPolyline } from './components/ArcGIS/utilities/geometry/createPolyline';
-// import { createSimpleLineSymbol } from './components/ArcGIS/utilities/symbols/createSimpleLineSymbol';
 import { createPolygon } from './components/ArcGIS/utilities/geometry/createPolygon';
 import { createSimpleFillSymbol } from './components/ArcGIS/utilities/symbols/createSimpleFillSymbol';
 import { DropdownSelector } from './components/DropdownSelector';
-import district from './data/district.json';
 import { useGetAllLocationsQuery } from './api/useGetAllLocationsQuery';
 import { basemaps } from './components/ArcGIS/data/basemaps';
+import { getViewCoordinates } from './components/ArcGIS/utilities/getViewCoordinates';
+import { MapMenu } from './components/MapMenu';
+import rings from './data/district.json';
 
 const App = () => {
   const [basemap, setBasemap] = useState<string>('osm')
-  const { data: locations } = useGetAllLocationsQuery()
+  const { data: locations, isLoading } = useGetAllLocationsQuery()
+
+  if (isLoading) return
 
   return (
     <Box sx={{ position: 'relative' }}>
@@ -26,35 +28,25 @@ const App = () => {
         options={basemaps}
         onChange={setBasemap}
       />
-      <ArcMapView mapProperties={{ basemap }} onClick={e => displayCoordinates(e)}>
+      <MapMenu locations={locations} />
+      <ArcMapView mapProperties={{ basemap }} onClick={e => console.log(getViewCoordinates(e))}>
         <ArcGraphicsLayer>
-          {locations.map(location => (
+          {locations.map(({ _id, longitude, latitude, color }) => (
             <ArcGraphic
-              key={location._id}
-              geometry={createPoint({ longitude: location.longitude, latitude: location.latitude })}
-              symbol={createSimpleMarkerSymbol({ color: [125, 255, 13, 0.25] })}
+              key={_id}
+              geometry={createPoint({ longitude, latitude })}
+              symbol={createSimpleMarkerSymbol({ color })}
             />
           ))}
-          {/* <ArcGraphic
-            geometry={createPolyline({ paths: [thedistrict] })}
-            symbol={createSimpleLineSymbol({ color: 'blue', width: 3, })}
-          /> */}
+
           <ArcGraphic
-            geometry={createPolygon({ rings: [district] })}
+            geometry={createPolygon({ rings })}
             symbol={createSimpleFillSymbol({ color: [0, 0, 0, 0.125] })}
           />
         </ArcGraphicsLayer>
       </ArcMapView>
     </Box>
   )
-}
-
-const displayCoordinates = (e: any) => {
-  const { longitude, latitude } = e.mapPoint
-  console.log({ longitude, latitude })
-  const { x, y } = e
-  console.log({ x, y })
-  console.log('====================================')
 }
 
 export default App;
