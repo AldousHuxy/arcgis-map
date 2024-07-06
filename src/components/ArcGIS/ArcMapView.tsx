@@ -3,6 +3,7 @@ import { createMapView } from './utilities/createMapView';
 import MapView from '@arcgis/core/views/MapView';
 import { MapViewContext } from '../../context/MapViewContext';
 import Basemap from '@arcgis/core/Basemap';
+import Toolbar from '@mui/material/Toolbar';
 
 type ArcMapViewProp = {
   children?: ReactNode
@@ -11,7 +12,7 @@ type ArcMapViewProp = {
 }
 
 export const ArcMapView = ({ children, mapProperties, onClick }: ArcMapViewProp) => {
-  const mapRef = useRef<any|null>(null)
+  const mapRef = useRef<any>(null)
   const [view, setView] = useState<MapView>()
 
   useEffect(() => {

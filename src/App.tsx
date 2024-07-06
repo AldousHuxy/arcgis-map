@@ -12,12 +12,15 @@ import { DropdownSelector } from './components/DropdownSelector';
 import { useGetAllLocationsQuery } from './api/useGetAllLocationsQuery';
 import { basemaps } from './components/ArcGIS/data/basemaps';
 import { getViewCoordinates } from './components/ArcGIS/utilities/getViewCoordinates';
-import { MapMenu } from './components/MapMenu';
 import rings from './data/district.json';
 
 const App = () => {
   const [basemap, setBasemap] = useState<string>('osm')
   const { data: locations, isLoading } = useGetAllLocationsQuery()
+
+  const handleClick = (e: __esri.ViewClickEvent) => {
+    console.log(getViewCoordinates(e))
+  }
 
   if (isLoading) return
 
@@ -28,8 +31,7 @@ const App = () => {
         options={basemaps}
         onChange={setBasemap}
       />
-      <MapMenu locations={locations} />
-      <ArcMapView mapProperties={{ basemap }} onClick={e => console.log(getViewCoordinates(e))}>
+      <ArcMapView mapProperties={{ basemap }} onClick={handleClick}>
         <ArcGraphicsLayer>
           {locations.map(({ _id, longitude, latitude, color }) => (
             <ArcGraphic
