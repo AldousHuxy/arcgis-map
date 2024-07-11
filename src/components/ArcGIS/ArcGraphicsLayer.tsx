@@ -6,6 +6,7 @@ import { createFeatureLayer } from './layers/createFeatureLayer';
 import { ServerType } from '../../types/enums/server';
 import { ServiceType } from '../../types/enums/service';
 import { useLayerManager } from '../../context/LayerManagerContext';
+import { ProblemType } from '../../types/enums/problem';
 
 type ArcGraphicsLayerProps = {
     children?: ReactNode
@@ -53,10 +54,26 @@ export const ArcGraphicsLayer = ({ children }: ArcGraphicsLayerProps) => {
         floodSummary1965Toggle && view?.map.add(createFeatureLayer(ServiceType.HYDRAULICS, 'FloodSummary1965', ServerType.MAPSERVER))
         pmr_FIRMToggle && view?.map.add(createFeatureLayer(ServiceType.HYDRAULICS, 'PMR_FIRM', ServerType.MAPSERVER))
         alertRainGaugesToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'ALERTRainGauges', ServerType.MAPSERVER))
-        problemsToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER))
+        problemsToggle && (
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Flood_Hazard_Point)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Stream_Function_Point)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Watershed_Development_Point)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Flood_Hazard_Line)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Stream_Function_Line)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Watershed_Change_Line)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Flood_Hazard_Polygon)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Stream_Function_Polygon)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Watershed_Change_Polygon)),
+            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Problem_Groups))
+        )
         projectsToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Projects', ServerType.MAPSERVER))
         projectTypesToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'ProjectTypes', ServerType.MAPSERVER))
         proposedActionsToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'ProposedActions', ServerType.MAPSERVER))
+
+        return () => {
+            view?.map.removeAll()
+        }
+
     }, [
         view,
         graphicsLayer,

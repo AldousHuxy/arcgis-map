@@ -17,7 +17,7 @@ type LayerItem = {
 type LayerManagerItemProps = {
     heading?: string
     title: string
-    items: LayerItem[]
+    items?: LayerItem[]
     icon: any
     openLayerManager: boolean
     setOpenLayerManager: (open: boolean) => void
@@ -41,7 +41,7 @@ export const LayerManagerItem = ({ heading, title, items, icon, openLayerManager
                 {openLayerManager ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openLayerManager} timeout="auto" unmountOnExit>
-                {items.map(({ text, checked, onChange }) => (
+                {items?.map(({ text, checked, onChange }) => (
                     <List key={text} component="div" disablePadding>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemText primary={text} />

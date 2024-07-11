@@ -25,7 +25,7 @@ import { LayerManagerProvider } from './context/LayerManagerContext';
 
 
 export const App = () => {
-  const drawerWidth: number = 240
+  const drawerWidth: number = 260
   const [basemap, setBasemap] = useState<string>('osm')
   // const { data: locations, isLoading } = useGetAllLocationsQuery()
   

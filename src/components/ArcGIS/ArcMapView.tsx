@@ -39,7 +39,7 @@ export const ArcMapView = ({ children, mapProperties, onClick }: ArcMapViewProp)
   }, [view, onClick])
 
   return (
-    <div ref={mapRef} style={{ height: '100vh' }}>
+    <div ref={mapRef} style={{ height: '90vh' }}>
       <MapViewContext.Provider value={{ view }}>
         {children}
       </MapViewContext.Provider>
