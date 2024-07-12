@@ -3,7 +3,6 @@ import { createMapView } from './utilities/createMapView';
 import MapView from '@arcgis/core/views/MapView';
 import { MapViewContext } from '../../context/MapViewContext';
 import Basemap from '@arcgis/core/Basemap';
-import Toolbar from '@mui/material/Toolbar';
 
 type ArcMapViewProp = {
   children?: ReactNode
@@ -39,7 +38,7 @@ export const ArcMapView = ({ children, mapProperties, onClick }: ArcMapViewProp)
   }, [view, onClick])
 
   return (
-    <div ref={mapRef} style={{ height: '90vh' }}>
+    <div ref={mapRef} style={{ height: '92.75vh' }}>
       <MapViewContext.Provider value={{ view }}>
         {children}
       </MapViewContext.Provider>
