@@ -2,11 +2,34 @@ import { ReactNode, useContext, useEffect, useState } from 'react'
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import { MapViewContext } from '../../context/MapViewContext';
 import { GraphicsLayersContext } from '../../context/GraphicsLayerContext';
-import { createFeatureLayer } from './layers/createFeatureLayer';
-import { ServerType } from '../../types/enums/server';
-import { ServiceType } from '../../types/enums/service';
 import { useLayerManager } from '../../context/LayerManagerContext';
-import { ProblemType } from '../../types/enums/problem';
+import {
+    alertRainGauges,
+    earthViews,
+    fema_NFHL,
+    floodsplainsNonFEMA,
+    floodSummary1965,
+    localGovernments,
+    pmr_FIRM,
+    problemsFloodHazardLine,
+    problemsFloodHazardPoint,
+    problemsFloodHazardPolygon,
+    problemsProblemGroups,
+    problemsStreamFunctionLine,
+    problemsStreamFunctionPoint,
+    problemsStreamFunctionPolygon,
+    problemsWatershed_Change_Line,
+    problemsWatershedChangePolygon,
+    problemsWatershedDevelopment_Point,
+    projects,
+    projectTypes,
+    proposedActions,
+    serviceAreas,
+    specialDistricts,
+    stream130acPoints,
+    streams,
+    streamSegments
+} from './layers/featureLayers';
 
 type ArcGraphicsLayerProps = {
     children?: ReactNode
@@ -42,33 +65,33 @@ export const ArcGraphicsLayer = ({ children }: ArcGraphicsLayerProps) => {
     useEffect(() => {
         if (!view || !graphicsLayer) return
         view?.map.add(graphicsLayer)
-        localGovernmentsToggle && view?.map.add(createFeatureLayer(ServiceType.BOUNDARIES, 'LocalGovernments', ServerType.MAPSERVER))
-        serviceAreasToggle && view?.map.add(createFeatureLayer(ServiceType.BOUNDARIES, 'ServiceAreas', ServerType.MAPSERVER))
-        specialDistrictsToggle && view?.map.add(createFeatureLayer(ServiceType.BOUNDARIES, 'SpecialDistricts', ServerType.MAPSERVER))
-        earthViewsToggle && view?.map.add(createFeatureLayer(ServiceType.GEOMORPHOLOGY, 'EarthViews', ServerType.MAPSERVER))
-        stream130acPointsToggle && view?.map.add(createFeatureLayer(ServiceType.HYDROLOGY, 'Stream130acPoints', ServerType.MAPSERVER))
-        streamSegmentsToggle && view?.map.add(createFeatureLayer(ServiceType.HYDROLOGY, 'StreamSegments', ServerType.MAPSERVER))
-        streamsToggle && view?.map.add(createFeatureLayer(ServiceType.HYDROLOGY, 'Streams', ServerType.MAPSERVER))
-        fema_NFHLToggle && view?.map.add(createFeatureLayer(ServiceType.HYDRAULICS, 'FEMA_NFHL', ServerType.MAPSERVER))
-        floodsplainsNonFEMAToggle && view?.map.add(createFeatureLayer(ServiceType.HYDRAULICS, 'FloodsplainsNonFEMA', ServerType.MAPSERVER))
-        floodSummary1965Toggle && view?.map.add(createFeatureLayer(ServiceType.HYDRAULICS, 'FloodSummary1965', ServerType.MAPSERVER))
-        pmr_FIRMToggle && view?.map.add(createFeatureLayer(ServiceType.HYDRAULICS, 'PMR_FIRM', ServerType.MAPSERVER))
-        alertRainGaugesToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'ALERTRainGauges', ServerType.MAPSERVER))
+        localGovernmentsToggle && view?.map.add(localGovernments)
+        serviceAreasToggle && view?.map.add(serviceAreas)
+        specialDistrictsToggle && view?.map.add(specialDistricts)
+        earthViewsToggle && view?.map.add(earthViews)
+        stream130acPointsToggle && view?.map.add(stream130acPoints)
+        streamSegmentsToggle && view?.map.add(streamSegments)
+        streamsToggle && view?.map.add(streams)
+        fema_NFHLToggle && view?.map.add(fema_NFHL)
+        floodsplainsNonFEMAToggle && view?.map.add(floodsplainsNonFEMA)
+        floodSummary1965Toggle && view?.map.add(floodSummary1965)
+        pmr_FIRMToggle && view?.map.add(pmr_FIRM)
+        alertRainGaugesToggle && view?.map.add(alertRainGauges)
         problemsToggle && (
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Flood_Hazard_Point)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Stream_Function_Point)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Watershed_Development_Point)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Flood_Hazard_Line)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Stream_Function_Line)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Watershed_Change_Line)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Flood_Hazard_Polygon)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Stream_Function_Polygon)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Watershed_Change_Polygon)),
-            view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Problems', ServerType.MAPSERVER, ProblemType.Problem_Groups))
+            view?.map.add(problemsFloodHazardPoint),
+            view?.map.add(problemsStreamFunctionPoint),
+            view?.map.add(problemsWatershedDevelopment_Point),
+            view?.map.add(problemsFloodHazardLine),
+            view?.map.add(problemsStreamFunctionLine),
+            view?.map.add(problemsWatershed_Change_Line),
+            view?.map.add(problemsFloodHazardPolygon),
+            view?.map.add(problemsStreamFunctionPolygon),
+            view?.map.add(problemsWatershedChangePolygon),
+            view?.map.add(problemsProblemGroups)
         )
-        projectsToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'Projects', ServerType.MAPSERVER))
-        projectTypesToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'ProjectTypes', ServerType.MAPSERVER))
-        proposedActionsToggle && view?.map.add(createFeatureLayer(ServiceType.MHFD, 'ProposedActions', ServerType.MAPSERVER))
+        projectsToggle && view?.map.add(projects)
+        projectTypesToggle && view?.map.add(projectTypes)
+        proposedActionsToggle && view?.map.add(proposedActions)
 
         return () => {
             view?.map.removeAll()
