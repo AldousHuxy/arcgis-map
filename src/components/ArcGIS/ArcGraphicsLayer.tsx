@@ -3,6 +3,8 @@ import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import { MapViewContext } from '../../context/MapViewContext';
 import { GraphicsLayersContext } from '../../context/GraphicsLayerContext';
 import { useLayerManager } from '../../context/LayerManagerContext';
+import LayerList from '@arcgis/core/widgets/LayerList';
+import Search from '@arcgis/core/widgets/Search';
 import {
     alertRainGauges,
     earthViews,
@@ -21,15 +23,15 @@ import {
     problemsWatershed_Change_Line,
     problemsWatershedChangePolygon,
     problemsWatershedDevelopment_Point,
-    projects,
     projectTypes,
-    proposedActions,
-    serviceAreas,
-    specialDistricts,
     stream130acPoints,
-    streams,
     streamSegments
-} from './layers/featureLayers';
+} from './layers/problemsLayer';
+import { serviceAreas } from './layers/serviceAreasLayer';
+import { streams } from './layers/streamsLayer';
+import { projects } from './layers/projectsLayer';
+import { proposedActions } from './layers/proposedActionsLayer';
+import { specialDistricts } from './layers/specialDistricts';
 
 type ArcGraphicsLayerProps = {
     children?: ReactNode
@@ -92,6 +94,9 @@ export const ArcGraphicsLayer = ({ children }: ArcGraphicsLayerProps) => {
         projectsToggle && view?.map.add(projects)
         projectTypesToggle && view?.map.add(projectTypes)
         proposedActionsToggle && view?.map.add(proposedActions)
+        
+        // view.ui.add(new Search( view ), { position: 'top-right' })
+        // view.ui.add(new LayerList( view ), { position: 'top-trailing' })
 
         return () => {
             view?.map.removeAll()

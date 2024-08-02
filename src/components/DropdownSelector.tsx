@@ -11,7 +11,6 @@ type DropdownSelectorProps = {
 
 export const DropdownSelector = ({ defaultMap, options, onChange }: DropdownSelectorProps) => {
     const handleChange = (e: SelectChangeEvent) => {
-        console.log(e.target.value)
         if (onChange) onChange(e.target.value)
     }
 

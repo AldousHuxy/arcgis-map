@@ -218,7 +218,7 @@ export const LayerManagerProvider = ({ children }: LayerManagerProviderProps) =>
     const [openHydrology, setOpenHydrology] = useState<boolean>(false)
     const [stream130acPointsToggle, setStream130acPointsToggle] = useState<boolean>(false)
     const [streamSegmentsToggle, setStreamSegmentsToggle] = useState<boolean>(false)
-    const [streamsToggle, setStreamsToggle] = useState<boolean>(true)
+    const [streamsToggle, setStreamsToggle] = useState<boolean>(true) // ON
     
     const [openHydraulics, setOpenHydraulics] = useState<boolean>(false)
     const [fema_NFHLToggle, setFEMA_NFHLToggle] = useState<boolean>(false)
@@ -229,8 +229,8 @@ export const LayerManagerProvider = ({ children }: LayerManagerProviderProps) =>
     
     const [openMHFD, setOpenMHFD] = useState<boolean>(false)
     const [alertRainGaugesToggle, setALERTRainGaugesToggle] = useState<boolean>(false)
-    const [problemsToggle, setProblemsToggle] = useState<boolean>(true)
-    const [projectsToggle, setProjectsToggle] = useState<boolean>(true)
+    const [problemsToggle, setProblemsToggle] = useState<boolean>(true) // ON
+    const [projectsToggle, setProjectsToggle] = useState<boolean>(true) // ON
     const [projectTypesToggle, setProjectTypesToggle] = useState<boolean>(false)
     const [proposedActionsToggle, setProposedActionsToggle] = useState<boolean>(false)
 

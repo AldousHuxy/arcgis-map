@@ -1,0 +1,1 @@
+export type Layer<Attributes> = { graphic: { attributes: Attributes } }
