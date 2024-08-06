@@ -5,6 +5,7 @@ import { GraphicsLayersContext } from '../../context/GraphicsLayerContext';
 import { useLayerManager } from '../../context/LayerManagerContext';
 import LayerList from '@arcgis/core/widgets/LayerList';
 import Search from '@arcgis/core/widgets/Search';
+import Locate from '@arcgis/core/widgets/Locate';
 import {
     alertRainGauges,
     earthViews,
@@ -32,6 +33,10 @@ import { streams } from './layers/streamsLayer';
 import { projects } from './layers/projectsLayer';
 import { proposedActions } from './layers/proposedActionsLayer';
 import { specialDistricts } from './layers/specialDistricts';
+import { locate } from './widgets/locate';
+import { search } from './widgets/search';
+import { layerList } from './widgets/layerList';
+import { Position } from './types/enums/position';
 
 type ArcGraphicsLayerProps = {
     children?: ReactNode
@@ -95,11 +100,13 @@ export const ArcGraphicsLayer = ({ children }: ArcGraphicsLayerProps) => {
         projectTypesToggle && view?.map.add(projectTypes)
         proposedActionsToggle && view?.map.add(proposedActions)
         
-        // view.ui.add(new Search( view ), { position: 'top-right' })
-        // view.ui.add(new LayerList( view ), { position: 'top-trailing' })
+        view.ui.add(locate(view), { position: Position.TOP_LEFT })
+        view.ui.add(search(view), { position: Position.TOP_RIGHT })
+        view.ui.add(layerList(view), { position: Position.TOP_TRAILING })
 
         return () => {
             view?.map.removeAll()
+            view?.ui.destroy()
         }
 
     }, [
